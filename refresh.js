@@ -62,9 +62,14 @@
       clearInterval(refreshInterval);
       refreshInterval = null;
       counter = 0;
+      console.log("Timer is off");
     } else {
       refreshInterval = setInterval(function () {
         counter += 1;
+        var leftTime = (600 - counter) / 60;
+        var minutes = Math.floor(leftTime);
+        var seconds = 600 - minutes * 60 - counter;
+        console.log(`Refresh in ${minutes}:${seconds}`);
         if (counter > interval) {
           onClick(true);
           counter = 0;
