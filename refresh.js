@@ -15,7 +15,6 @@
   refreshInterval = null;
 
   reloadTabs = function ($tabs) {
-    console.log("tabs", tabs);
     var item, _i, _len, _results;
     _results = [];
     for (_i = 0, _len = $tabs.length; _i < _len; _i++) {
@@ -63,6 +62,7 @@
       refreshInterval = null;
       counter = 0;
       console.log("Timer is off");
+      onClick(true);
     } else {
       refreshInterval = setInterval(function () {
         counter += 1;
