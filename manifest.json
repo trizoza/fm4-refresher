@@ -1,0 +1,14 @@
+{
+  "name": "FM4 Reloader",
+  "description": "Reload FM4 every 10 minutes",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_title": "Reload FM4 every 10 minutes"
+  },
+  "background": {
+    "scripts": ["refresh.js"]
+  },
+  "permissions": ["tabs"],
+  "offline_enabled": true,
+  "version": "1.0"
+}
