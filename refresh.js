@@ -51,9 +51,9 @@
     } else {
       refreshInterval = setInterval(function () {
         console.log("counter", counter);
-        leftTime = (600 - counter) / 60;
+        leftTime = (interval - counter) / 60;
         minutes = Math.floor(leftTime);
-        seconds = 600 - minutes * 60 - counter;
+        seconds = interval - minutes * 60 - counter;
         console.log(
           `Refresh in ${minutes}:${seconds < 10 ? "0" + seconds : seconds}`,
         );
