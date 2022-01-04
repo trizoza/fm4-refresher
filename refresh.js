@@ -5,13 +5,16 @@
     reloadTabs,
     tabs,
     windows,
+    leftTime,
+    minutes,
+    seconds,
     refreshInterval;
 
   (browserAction = chrome.browserAction),
     (windows = chrome.windows),
     (tabs = chrome.tabs);
 
-  interval = 600000;
+  interval = 540;
   refreshInterval = null;
 
   reloadTabs = function ($tabs) {
@@ -26,31 +29,13 @@
     return _results;
   };
 
-  onClick = function ($double) {
+  onClick = function () {
     return windows.getCurrent(
       {
         populate: true,
       },
       function ($window) {
-        var item, pinnedList, unpinnedList;
-        pinnedList = (function () {
-          var _i, _len, _ref, _results;
-          _ref = $window.tabs;
-          _results = [];
-          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-            item = _ref[_i];
-            if (item.pinned) {
-              _results.push(item);
-            }
-          }
-          return _results;
-        })();
-        unpinnedList = $window.tabs.slice(pinnedList.length);
-        if (pinnedList.length) {
-          return reloadTabs($double ? unpinnedList : pinnedList);
-        } else {
-          return reloadTabs(unpinnedList);
-        }
+        return reloadTabs($window.tabs);
       },
     );
   };
@@ -62,17 +47,20 @@
       refreshInterval = null;
       counter = 0;
       console.log("Timer is off");
-      onClick(true);
+      onClick(false);
     } else {
       refreshInterval = setInterval(function () {
+        console.log("counter", counter);
+        leftTime = (600 - counter) / 60;
+        minutes = Math.floor(leftTime);
+        seconds = 600 - minutes * 60 - counter;
+        console.log(
+          `Refresh in ${minutes}:${seconds < 10 ? "0" + seconds : seconds}`,
+        );
         counter += 1;
-        var leftTime = (600 - counter) / 60;
-        var minutes = Math.floor(leftTime);
-        var seconds = 600 - minutes * 60 - counter;
-        console.log(`Refresh in ${minutes}:${seconds}`);
         if (counter > interval) {
-          onClick(true);
           counter = 0;
+          onClick(false);
         }
       }, 1000);
     }
