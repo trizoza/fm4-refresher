@@ -14,7 +14,7 @@
     (windows = chrome.windows),
     (tabs = chrome.tabs);
 
-  interval = 180;
+  interval = 360;
   refreshInterval = null;
 
   reloadTabs = function ($tabs) {
