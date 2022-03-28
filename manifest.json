@@ -6,7 +6,7 @@
   "background": {
     "service_worker": "refresh.js"
   },
-  "permissions": ["tabs", "webNavigation", "dom"],
+  "permissions": ["tabs", "webNavigation"],
   "offline_enabled": true,
   "action": {
     "default_popup": "popup.html",
